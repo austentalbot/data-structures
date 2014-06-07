@@ -81,6 +81,19 @@ treeMethods.contains = function(target){
   return test;
 };
 
+treeMethods.traverse = function(callback) {
+  var dig=function(place) {
+    //perform callback on each node
+    callback.call(null, place.value);
+    //recurse over children
+    if (place.children!==undefined) {
+      _.each(place.children, function(child) {
+        dig(child);
+      });
+    }
+  };
+  dig(this);
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
